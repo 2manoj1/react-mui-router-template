@@ -10,11 +10,14 @@ import {
 	Toolbar,
 	Tooltip,
 	Typography,
+	Link,
 } from "@mui/material";
 
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+
+import { Link as RouterLink } from "react-router-dom";
 
 const pages = ["Dashboard", "Blog"];
 const settings = ["Profile", "Logout"];
@@ -89,11 +92,17 @@ const AppHeader = () => {
 							sx={{
 								display: { xs: "block", md: "none" },
 							}}>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
+							{pages.map((page) => {
+								const toPath = page === "Blog" ? "blogs" : "/";
+								console.log(toPath);
+								return (
+									<Link component={RouterLink} to={toPath} key={page}>
+										<MenuItem onClick={handleCloseNavMenu}>
+											<Typography textAlign="center">{page}</Typography>
+										</MenuItem>
+									</Link>
+								);
+							})}
 						</Menu>
 					</Box>
 					<IntegrationInstructionsIcon
@@ -117,14 +126,20 @@ const AppHeader = () => {
 						Manoj's Training
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-						{pages.map((page) => (
-							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "white", display: "block" }}>
-								{page}
-							</Button>
-						))}
+						{pages.map((page) => {
+							const toPath = page === "Blog" ? "blogs" : "/";
+
+							return (
+								<Link component={RouterLink} to={toPath} key={page}>
+									<Button
+										key={page}
+										onClick={handleCloseNavMenu}
+										sx={{ my: 2, color: "white", display: "block" }}>
+										{page}
+									</Button>
+								</Link>
+							);
+						})}
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
@@ -150,7 +165,12 @@ const AppHeader = () => {
 							onClose={handleCloseUserMenu}>
 							{settings.map((setting) => (
 								<MenuItem key={setting} onClick={handleCloseUserMenu}>
-									<Typography textAlign="center">{setting}</Typography>
+									<Link
+										sx={{ textDecoration: "none" }}
+										component={RouterLink}
+										to={setting.toLocaleLowerCase()}>
+										<Typography textAlign="center">{setting}</Typography>
+									</Link>
 								</MenuItem>
 							))}
 						</Menu>
