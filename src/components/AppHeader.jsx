@@ -16,7 +16,7 @@ import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstruct
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 
-const pages = ["Dashboard", "Products", "Blog"];
+const pages = ["Dashboard", "Blog"];
 const settings = ["Profile", "Logout"];
 
 const AppHeader = () => {

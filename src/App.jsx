@@ -1,7 +1,13 @@
 import AppHeader from "./components/AppHeader";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-	return <AppHeader />;
+	return (
+		<>
+			<AppHeader />
+			<Dashboard />
+		</>
+	);
 }
 
 export default App;
